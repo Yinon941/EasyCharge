@@ -1,0 +1,48 @@
+# Compiled object files
+*.o
+*.obj
+
+# Executable
+easycharge
+easycharge.exe
+
+# Debug / PDB files
+*.pdb
+*.ilk
+
+# Visual Studio / MSVC artifacts
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
+*.sln
+*.suo
+*.user
+*.aps
+*.ncb
+*.opendb
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+Debug/
+Release/
+x64/
+x86/
+.vs/
+ipch/
+
+# Build output
+build/
+
+# Editor / OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Dependency files
+*.d
+
+# Claude Code internal
+.claude/
