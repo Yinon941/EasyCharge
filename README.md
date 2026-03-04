@@ -1,6 +1,6 @@
-# EasyCharge – Electric Vehicle Charging Station Management System
+# EasyCharge - Electric Vehicle Charging Station Management System
 
-Final project for Advanced C Programming – Spring 2025
+Final project for Advanced C Programming 
 
 ---
 
@@ -102,4 +102,4 @@ make
 
 ---
 
-*Submitted as a final project for the Advanced C Programming course, Spring 2025*
+*Submitted as a final project for the Advanced C Programming course*
