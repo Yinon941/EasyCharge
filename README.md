@@ -1,56 +1,59 @@
-# EasyCharge - מערכת ניהול תחנות טעינה לרכבים חשמליים
+# EasyCharge – Electric Vehicle Charging Station Management System
 
-פרויקט גמר בקורס תכנות מתקדם ב-C - שנה א' סמסטר ב'
-
----
-
-## על הפרויקט
-
-המערכת מנהלת תחנות טעינה לרכבים חשמליים. כל תחנה מכילה מספר יציאות טעינה (מהירות שונות – מהיר / בינוני / איטי), ורכבים יכולים להתחיל טעינה, להיכנס לתור, ולסיים טעינה. המערכת שומרת את כל הנתונים בקבצי CSV ומעדכנת אותם בכל פעולה.
+Final project for Advanced C Programming – Spring 2025
 
 ---
 
-## מבני נתונים
+## Overview
 
-| מבנה | שימוש |
-|------|--------|
-| BST (עץ בינארי ממוין) | חיפוש תחנות לפי ID, חיפוש רכבים לפי לוחית רישוי |
-| Linked List | רשימת יציאות בכל תחנה |
-| Queue (תור) | תור המתנה לרכבים בכל תחנה |
+EasyCharge is a console-based management system for electric vehicle charging stations. Each station contains multiple charging ports (Fast / Mid / Slow), and vehicles can start charging, join a waiting queue, and stop charging with automatic payment calculation. All data is persisted to CSV files and updated after every operation.
 
 ---
 
-## קבצי מקור
+## Data Structures
+
+| Structure | Usage |
+|-----------|-------|
+| BST (Binary Search Tree) | Station lookup by ID, vehicle lookup by license plate |
+| Linked List | Port list per station |
+| Queue | Waiting queue per station |
+
+---
+
+## Project Structure
 
 ```
-src/
-├── types.h          – הגדרות טיפוסים משותפות
-├── queue.c/h        – מימוש תור ההמתנה
-├── port_list.c/h    – מימוש רשימת היציאות
-├── car_bst.c/h      – BST של רכבים (לפי לוחית)
-├── station_bst.c/h  – BST של תחנות (לפי ID)
-├── file_io.c/h      – קריאה וכתיבה מקבצים
-├── menu_ops.c/h     – לוגיקת תפריט התוכנה
-└── main.c           – נקודת הכניסה
-```
-
-קבצי נתונים (בשורש הפרויקט):
-```
-Stations.txt, Ports.txt, Cars.txt, LineOfCars.txt
+EasyCharge/
+├── src/
+│   ├── types.h          – Shared type definitions
+│   ├── queue.c/h        – Waiting queue ADT
+│   ├── port_list.c/h    – Charging port linked list ADT
+│   ├── car_bst.c/h      – Cars BST (keyed by license plate)
+│   ├── station_bst.c/h  – Stations BST (keyed by ID)
+│   ├── file_io.c/h      – File load/save (CSV)
+│   ├── menu_ops.c/h     – Menu operations
+│   └── main.c           – Entry point
+├── Stations.txt          – Station data
+├── Ports.txt             – Port data
+├── Cars.txt              – Vehicle data
+├── LineOfCars.txt        – Queue data
+├── Makefile
+├── compile.bat           – Windows build script
+└── run.bat               – Windows run script
 ```
 
 ---
 
-## הידור והרצה
+## Build & Run
 
-### Windows – הכי פשוט
+### Windows (easiest)
 
 ```
-לחץ פעמיים על compile.bat   ← מהדר את הפרויקט
-לחץ פעמיים על run.bat        ← מריץ את התוכנה
+Double-click compile.bat    ← builds the executable
+Double-click run.bat        ← runs the program
 ```
 
-### דרך GCC ידנית (MSYS2)
+### Manual (GCC / MSYS2)
 
 ```bash
 gcc -Wall -Wextra -g -std=c99 -Isrc \
@@ -67,34 +70,36 @@ make
 ./build/easycharge
 ```
 
-> **שים לב:** חייבים להריץ מתיקיית הפרויקט (לא מתיקיית build) כי התוכנה מחפשת את קבצי ה-.txt שם.
+> **Note:** Always run from the project root directory, not from `build/`, so the program can locate the `.txt` data files.
 
 ---
 
-## פונקציות התפריט
+## Menu Operations
 
-1. חיפוש תחנה קרובה לפי קואורדינטות
-2. כניסת רכב לטעינה (או לתור)
-3. בדיקת מצב רכב
-4. עצירת טעינה וחישוב תשלום
-5. הצגת כל התחנות
-6. הצגת רכבים בתחנה
-7. דוח סטטיסטיקות תחנה
-8. הצגת 5 הלקוחות המובילים
-9. הוספת יציאה חדשה
-10. שחרור יציאות שחרגו מ-10 שעות
-11. הסרת יציאה תקולה
-12. הסרת לקוח
-13. סגירת תחנה
-0. יציאה (שמירת נתונים)
-
----
-
-## דרישות סביבה
-
-- GCC עם תמיכה ב-C99 (MSYS2 / MinGW64 מומלץ על Windows)
-- אין ספריות חיצוניות, רק ספריית C סטנדרטית.
+| # | Operation |
+|---|-----------|
+| 1 | Find nearest charging station by coordinates |
+| 2 | Start charging a vehicle (or join queue if full) |
+| 3 | Check vehicle charging status |
+| 4 | Stop charging and calculate payment |
+| 5 | Display all stations |
+| 6 | Display vehicles at a station |
+| 7 | Station statistics report |
+| 8 | Display top 5 customers by total payment |
+| 9 | Add a new charging port |
+| 10 | Release ports that exceeded 10 hours |
+| 11 | Remove an out-of-order port |
+| 12 | Remove a customer |
+| 13 | Close a station |
+| 0 | Exit (saves all data) |
 
 ---
 
-*מוגש כפרויקט גמר בקורס מבני נתונים ותכנות מתקדם ב-C, אביב 2025*
+## Requirements
+
+- GCC with C99 support (MSYS2 / MinGW64 recommended on Windows)
+- No external libraries — standard C library only
+
+---
+
+*Submitted as a final project for the Advanced C Programming course, Spring 2025*
