@@ -2,7 +2,7 @@
 
 Final project for Advanced C Programming 
 
----
+--- 
 
 ## Overview
 
